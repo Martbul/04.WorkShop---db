@@ -1,14 +1,12 @@
-const uniqid = require("uniqid");
+
+const Cube = require('./../models/Cube');
 const cubes = [];
 
-exports.create = (cubeData) => {
-  const newCube = {
-    id: uniqid(),
-    ...cubeData,
-  };
+exports.create = async (cubeData) => {
+ const cube = await  Cube.create(cubeData)
 
-  cubes.push(newCube);
-  return newCube;
+ return cube;
+ 
 };
 
 exports.getAll = (search, from, to) => {
