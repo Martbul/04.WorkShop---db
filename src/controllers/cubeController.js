@@ -60,11 +60,20 @@ router.get('/:cubeId/edit',async (req, res) => {
  const cube = await cubeService.getSingleCube(cubeId).lean();
  const options = difficultyLevelOptionsViewData(cube.difficultyLevel)
  
- 
- 
  //populating cube data on the template for editing
   res.render('cube/edit',{cube,options})
 })
+
+router.post('/:cubeId/edit',async(req,res) =>{
+const {cubeId} = req.params
+  const {name, imageUrl, difficultyLevel, description} = req.body
+  const payload =  {name, imageUrl, difficultyLevel, description}
+
+  await cubeService.update(cubeId,payload)
+
+  res.redirect(`/cubes/${cubeId}/details`)
+})
+
 
 
 router.get('/:cubeId/delete',async (req, res) => {
@@ -72,9 +81,15 @@ router.get('/:cubeId/delete',async (req, res) => {
   const cube = await cubeService.getSingleCube(cubeId).lean();
   const options = difficultyLevelOptionsViewData(cube.difficultyLevel)
   
-
-
-
   res.render('cube/delete',{cube,options})
 })
+
+
+router.post('/:cubeId/delete', async (req, res) => {
+const {cubeId}= req.params
+await cubeService.delete(cubeId)
+
+res.redirect(`/`)
+})
+
 module.exports = router;
