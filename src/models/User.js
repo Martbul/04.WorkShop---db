@@ -17,7 +17,7 @@ userSchema.virtual('repeatPassword').set(function(value){
 
 
 userSchema.pre('save',async function(){
-    //                             word         salt rounds
+    //                             word         salt rounds()
     const hash =await bcrypt.hash(this.password,10)
     this.password = hash;
 })
