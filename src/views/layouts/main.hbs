@@ -8,7 +8,7 @@
   </head>
 
   <body>
-    <div class="container">
+    
       <header>
         <ul>
           <li><img class="logo" src="/images/logo.png" /></li>
@@ -21,9 +21,18 @@
                 <li><a href="/users/register">Register</a></li>
         </ul>
       </header>
+<div class="container">
 
+{{errorMessages}}
+{{#each errorMessages}}
+      <div id="notification">
+      <p id="notification-message">{{this}}</p>
+{{/each}}
+    </div>
       {{{body}}}
     </div>
+
+    
 
     <footer>@Cubicle: Exercise for Express.js and Handlebars</footer>
   </body>
